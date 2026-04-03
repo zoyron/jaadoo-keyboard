@@ -129,9 +129,9 @@ function Key({ sublabel, index, onPress }: KeyProps) {
   }, [index, onPress]); // Stable listeners
 
   return (
-    <div className="jaadu-key-wrapper">
+    <div className="jaadoo-key-wrapper">
       <div 
-        className={`jaadu-key ${pressed ? 'pressed' : ''}`}
+        className={`jaadoo-key ${pressed ? 'pressed' : ''}`}
         onMouseDown={() => { if(!pressedRef.current) { pressedRef.current = true; setPressed(true); startSound(); } }}
         onMouseUp={() => { if(pressedRef.current) { pressedRef.current = false; setPressed(false); stopSound(); } }}
         onMouseLeave={() => { if(pressedRef.current) { pressedRef.current = false; setPressed(false); stopSound(); } }}
@@ -186,7 +186,7 @@ function App() {
           <img src="/roshan.png" className="sticker" alt="Roshan Sticker" />
         </div>
         
-        <div className="jaadu-keyboard-container">
+        <div className="jaadoo-keyboard-container">
           <div className="keyboard">
             {keys.map((row, rowIndex) => (
               <div key={rowIndex} className="key-row">

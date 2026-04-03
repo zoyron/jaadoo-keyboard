@@ -132,7 +132,7 @@ body {
   transform: rotate(5deg);
 }
 
-.jaadu-keyboard-container {
+.jaadoo-keyboard-container {
   padding: 50px 60px; 
   background: var(--panel-bg);
   position: relative;
@@ -147,8 +147,8 @@ body {
 }
 
 /* Add some "screws" to the panel to match the image */
-.jaadu-keyboard-container::before,
-.jaadu-keyboard-container::after {
+.jaadoo-keyboard-container::before,
+.jaadoo-keyboard-container::after {
   content: '';
   position: absolute;
   width: 12px;
@@ -158,8 +158,8 @@ body {
   box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
 }
 
-.jaadu-keyboard-container::before { top: 20px; left: 20px; }
-.jaadu-keyboard-container::after { top: 20px; right: 20px; }
+.jaadoo-keyboard-container::before { top: 20px; left: 20px; }
+.jaadoo-keyboard-container::after { top: 20px; right: 20px; }
 
 .keyboard {
   display: flex;
@@ -173,14 +173,14 @@ body {
   gap: 40px; 
 }
 
-.jaadu-key-wrapper {
+.jaadoo-key-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
 
-.jaadu-key {
+.jaadoo-key {
   width: 150px; /* HORIZONTAL */
   height: 110px; /* VERTICAL */
   position: relative;
@@ -189,17 +189,17 @@ body {
   transition: transform 0.1s ease;
 }
 
-.jaadu-key.pressed {
+.jaadoo-key.pressed {
   transform: translateZ(-10px) translateY(4px);
 }
 
-.jaadu-key.pressed .key-glow {
+.jaadoo-key.pressed .key-glow {
   opacity: 1;
   inset: -30px;
   background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, transparent 75%);
 }
 
-.jaadu-key.pressed .key-top-surface {
+.jaadoo-key.pressed .key-top-surface {
   background: radial-gradient(circle at center, #ff3333 0%, #cc0000 70%, #990000 100%);
   box-shadow: inset 0 0 15px rgba(255,255,255,0.4);
 }
@@ -238,7 +238,7 @@ body {
   transition: all 0.1s ease;
 }
 
-.jaadu-key.pressed .key-top-surface {
+.jaadoo-key.pressed .key-top-surface {
   background: var(--red-alert);
   box-shadow: 
     inset 0 0 20px rgba(255, 255, 255, 0.4),
@@ -263,24 +263,24 @@ body {
   100% { opacity: 1; transform: scale(1); }
 }
 
-.jaadu-key-wrapper {
+.jaadoo-key-wrapper {
   animation: keyAppear 0.4s ease-out backwards;
 }
 
-.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(1) { animation-delay: 0.1s; }
-.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(2) { animation-delay: 0.2s; }
-.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(3) { animation-delay: 0.3s; }
-.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(4) { animation-delay: 0.4s; }
-.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(1) { animation-delay: 0.5s; }
-.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(2) { animation-delay: 0.6s; }
-.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(3) { animation-delay: 0.7s; }
-.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(4) { animation-delay: 0.8s; }
+.key-row:nth-child(1) .jaadoo-key-wrapper:nth-child(1) { animation-delay: 0.1s; }
+.key-row:nth-child(1) .jaadoo-key-wrapper:nth-child(2) { animation-delay: 0.2s; }
+.key-row:nth-child(1) .jaadoo-key-wrapper:nth-child(3) { animation-delay: 0.3s; }
+.key-row:nth-child(1) .jaadoo-key-wrapper:nth-child(4) { animation-delay: 0.4s; }
+.key-row:nth-child(2) .jaadoo-key-wrapper:nth-child(1) { animation-delay: 0.5s; }
+.key-row:nth-child(2) .jaadoo-key-wrapper:nth-child(2) { animation-delay: 0.6s; }
+.key-row:nth-child(2) .jaadoo-key-wrapper:nth-child(3) { animation-delay: 0.7s; }
+.key-row:nth-child(2) .jaadoo-key-wrapper:nth-child(4) { animation-delay: 0.8s; }
 
 @media (max-width: 600px) {
-  .jaadu-keyboard-container {
+  .jaadoo-keyboard-container {
     padding: 30px;
   }
-  .jaadu-key {
+  .jaadoo-key {
     width: 60px;
     height: 45px;
   }
