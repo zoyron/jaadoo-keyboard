@@ -1,0 +1,293 @@
+:root {
+  --red-alert: #ff1a1a;
+  --red-glow: #ff4d4d;
+  --red-dark: #cc0000;
+  --panel-bg: #d1d5db; /* Light grey metal look */
+  --key-base: #2a2a2a;
+  --text-label: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100vw;
+  max-width: none;
+  border: none;
+  font-family: 'Rajdhani', sans-serif;
+  overflow: hidden;
+}
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+.visual-section {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  display: flex;
+  background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+  overflow: hidden;
+}
+
+.visual-column {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-column.left {
+  border-right: 1px solid #333;
+}
+
+.monitor-overlay {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.monitor-label {
+  color: #00ff00;
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-shadow: 0 0 10px #00ff00;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 100;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 99;
+}
+
+.device-layer {
+  width: 100%;
+  display: flex;
+  align-items: center; /* Center horizontally and vertically relative to container */
+  justify-content: center;
+  padding: 0 40px 40px 40px;
+  position: relative;
+  z-index: 50;
+  flex: 1; /* Occupy remaining space */
+}
+
+.sticker-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticker {
+  width: 360px; /* 3x size as requested */
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,1));
+  transition: transform 0.3s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.sticker-area.left .sticker {
+  transform: rotate(-5deg);
+}
+
+.sticker-area.right .sticker {
+  transform: rotate(5deg);
+}
+
+.jaadu-keyboard-container {
+  padding: 50px 60px; 
+  background: var(--panel-bg);
+  position: relative;
+  border: 4px solid #b1b5bb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  flex-shrink: 0;
+  width: 850px; /* Locked width for stability */
+  border-radius: 12px;
+}
+
+/* Add some "screws" to the panel to match the image */
+.jaadu-keyboard-container::before,
+.jaadu-keyboard-container::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #999;
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
+}
+
+.jaadu-keyboard-container::before { top: 20px; left: 20px; }
+.jaadu-keyboard-container::after { top: 20px; right: 20px; }
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 60px; /* Vertical gap between rows */
+  perspective: 1500px;
+}
+
+.key-row {
+  display: flex;
+  gap: 40px; 
+}
+
+.jaadu-key-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.jaadu-key {
+  width: 150px; /* HORIZONTAL */
+  height: 110px; /* VERTICAL */
+  position: relative;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+}
+
+.jaadu-key.pressed {
+  transform: translateZ(-10px) translateY(4px);
+}
+
+.jaadu-key.pressed .key-glow {
+  opacity: 1;
+  inset: -30px;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, transparent 75%);
+}
+
+.jaadu-key.pressed .key-top-surface {
+  background: radial-gradient(circle at center, #ff3333 0%, #cc0000 70%, #990000 100%);
+  box-shadow: inset 0 0 15px rgba(255,255,255,0.4);
+}
+
+.key-glow {
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(255, 26, 26, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  transition: all 0.1s ease; /* Snappier glow */
+  z-index: -1;
+}
+
+
+.key-body {
+  width: 100%;
+  height: 100%;
+  background: var(--key-base);
+  position: relative;
+  /* Create the beveled base */
+  transform: skewX(-5deg);
+  border-radius: 6px;
+}
+
+.key-top-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 18px; /* Slightly taller base for larger keys */
+  background: var(--red-dark);
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.3),
+    0 6px 0 #800000;
+  transition: all 0.1s ease;
+}
+
+.jaadu-key.pressed .key-top-surface {
+  background: var(--red-alert);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 30px var(--red-glow),
+    0 1px 0 #800000;
+  transform: translateY(4px);
+}
+
+.key-sublabel {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+/* Animations */
+@keyframes keyAppear {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.jaadu-key-wrapper {
+  animation: keyAppear 0.4s ease-out backwards;
+}
+
+.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(1) { animation-delay: 0.1s; }
+.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(2) { animation-delay: 0.2s; }
+.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(3) { animation-delay: 0.3s; }
+.key-row:nth-child(1) .jaadu-key-wrapper:nth-child(4) { animation-delay: 0.4s; }
+.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(1) { animation-delay: 0.5s; }
+.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(2) { animation-delay: 0.6s; }
+.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(3) { animation-delay: 0.7s; }
+.key-row:nth-child(2) .jaadu-key-wrapper:nth-child(4) { animation-delay: 0.8s; }
+
+@media (max-width: 600px) {
+  .jaadu-keyboard-container {
+    padding: 30px;
+  }
+  .jaadu-key {
+    width: 60px;
+    height: 45px;
+  }
+  .key-row {
+    gap: 20px;
+  }
+  .keyboard {
+    gap: 40px;
+  }
+}
